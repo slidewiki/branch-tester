@@ -12,13 +12,13 @@ echo ">>>> Building"
 npm install
 npm run install
 
-if [ -e /config/microservices.js ]
+if [ "$USE_CUSTOM_MICROSERVICES"="0" ]
 then
-    echo ">>>> Using custom microservice configuration from /config/microservices.json"
-    cp /config/microservices.js /nodeApp/configs/microservices.js
+  echo ">>>> Using default configuration from repository"
+  mv /nodeApp/configs/microservices.sample.js /nodeApp/configs/microservices.js
 else
-    echo ">>>> Using default configuration from repository"
-    mv /nodeApp/configs/microservices.sample.js /nodeApp/configs/microservices.js
+  echo ">>>> Using custom microservice configuration from /config/microservices.json"
+  cp /config/microservices.js /nodeApp/configs/microservices.js
 fi
 
 echo ">>>> Running platform in production mode"

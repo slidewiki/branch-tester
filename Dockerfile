@@ -5,7 +5,7 @@ WORKDIR /nodeApp
 ADD entrypoint.sh /
 
 VOLUME /config/microservices.js
-
+ENV USE_CUSTOM_MICROSERVICES=0
 EXPOSE 3000
 
 ENTRYPOINT ["/entrypoint.sh"]
