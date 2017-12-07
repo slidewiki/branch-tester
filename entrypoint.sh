@@ -8,12 +8,21 @@ echo ">>>> Checking out branch $BRANCH"
 git checkout $BRANCH
 
 echo ">>>> Building"
-mv /nodeApp/configs/microservices.sample.js /nodeApp/configs/microservices.js
 ./make_version.sh
 npm install
 npm run install
 
+if [ -e /config/microservices.js ]
+then
+    echo ">>>> Using custom microservice configuration from /config/microservices.json"
+    cp /config/microservices.js /nodeApp/configs/microservices.js
+else
+    echo ">>>> Using default configuration from repository"
+    mv /nodeApp/configs/microservices.sample.js /nodeApp/configs/microservices.js
+fi
+
 echo ">>>> Running platform in production mode"
 RUNNING=$(git symbolic-ref --short HEAD)
 echo ">>>> Active branch: $RUNNING"
+
 npm run build
