@@ -12,17 +12,16 @@ echo ">>>> Building"
 npm install
 npm run install
 
-if [ "$USE_CUSTOM_MICROSERVICES"="0" ]
+if [ -f /config/microservices.js ]
 then
-  echo ">>>> Using default configuration from repository"
-  mv /nodeApp/configs/microservices.sample.js /nodeApp/configs/microservices.js
-else
-  echo ">>>> Using custom microservice configuration from /config/microservices.json"
+  echo ">>>> Using custom microservice configuration"
   cp /config/microservices.js /nodeApp/configs/microservices.js
+else
+  echo ">>>> Using default configuration microservices.sample.js"
+  mv /nodeApp/configs/microservices.sample.js /nodeApp/configs/microservices.js
 fi
 
-echo ">>>> Running platform in production mode"
 RUNNING=$(git symbolic-ref --short HEAD)
-echo ">>>> Active branch: $RUNNING"
+echo ">>>> Running branch: $RUNNING"
 
 npm run build
