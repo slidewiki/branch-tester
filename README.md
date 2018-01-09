@@ -10,8 +10,13 @@ on `experimental.slidewiki.org`.
 
 `./run_branch <branch name>`
 
+(`./run_branch.sh <branch name>` for Mac OS X terminal)
+
+
 ## Stopping the container
 
 `./stop_container`
+
+(`./stop_container.sh` for Mac OS X terminal)
 
 This will also remove the container.
